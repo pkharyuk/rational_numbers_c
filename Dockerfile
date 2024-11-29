@@ -1,17 +1,16 @@
 FROM ubuntu:22.04
 
 RUN apt update \
-    && apt-install -y \
-        build-essential \
+    && apt install -y \
         make \
         gcc \
-        libm-dev \
         bash \
         valgrind \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /demo
 COPY ./ ./
-RUN make compile
+RUN chmod +x ./scripts.sh
+RUN ./scripts.sh compile
 
-CMD ["./demo", "-n", "15"]
+CMD ["./scripts.sh", "run_demo"]

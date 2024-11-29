@@ -1,6 +1,7 @@
 #!/bin/bash
 
-docker_image_name=rational-numbers-c
+docker_image_name="rational-numbers-c"
+docker_image_tag="latest"
 
 function help() {
     echo -e "\t\t\tCommands:"
@@ -8,6 +9,7 @@ function help() {
     echo -e "\t\t Docker"
     echo -e "\t docker_build : Build docker image"
     echo -e "\t docker_run : Run docker container"
+    echo -e "\t docker_run_demo : Run demonstration in docker container"
     echo -e "\t docker_clean : Clean related docker files"
     echo
     echo -e "\t\t Building from sources"
@@ -22,15 +24,20 @@ function help() {
 
 # build docker container
 function docker_build() {
-    docker build -t $docker_image_name .
+    docker build -t $docker_image_name:$docker_image_tag ./
 }
 # run docker
-function docker_run() {
-    docker run -it --rm $docker_image_name
+function docker_run_demo() {
+    docker run -it --rm $docker_image_name:$docker_image_tag
 }
+function docker_run() {
+    docker run -it --rm $docker_image_name:$docker_image_tag bash
+}
+
 # delete docker files
 function docker_clean() {
-    docker rm $(docker stop $(docker ps -a -q --filter ancestor=$docker_image_name --format="{{.ID}}"))
+    #docker rm $(docker stop $(docker ps -a -q --filter ancestor=$docker_image_name --format="{{.ID}}"))
+    docker rmi $docker_image_name:$docker_image_tag
 }
 
 
@@ -52,7 +59,9 @@ function clean() {
 
 case $1 in
     docker_build)
-        docker_clean ;;
+        docker_build ;;
+    docker_run_demo)
+        docker_run_demo ;;
     docker_run)
         docker_run ;;
     docker_clean)

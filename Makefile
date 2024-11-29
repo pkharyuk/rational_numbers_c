@@ -20,8 +20,8 @@ UTCFLAGS = -g
 UTEST_FILES = $(wildcard $(UTEST_DIR)/*.c)
 UTEST_OBJ_FILES = $(patsubst $(UTEST_DIR)/%.c,$(BUILD_DIR)/%.o,$(UTEST_FILES))
 
-TARGET = task3
-UT_TARGET = unit_tests
+TARGET = demo
+UT_TARGET = unit_test
 
 compile: $(TARGET)
 
@@ -32,7 +32,7 @@ run_demo: $(TARGET)
 	./$(TARGET) -i $(SAMPLE_INPUT_FILE)
 	@echo -e "\n"
 
-unit_test: $(UT_TARGET)
+unit_tests: $(UT_TARGET)
 	./$(UT_TARGET)
 
 $(TARGET): $(OBJ_FILES) $(TARGET_SRC_FILE)

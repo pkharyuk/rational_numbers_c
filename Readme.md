@@ -31,7 +31,7 @@ Contains rules and shortcuts for several operations:
 
 ### Dockerfile
 
-Basic docker file for creating suitable image
+Basic docker file for creating suitable image. The size of the resulting image is approximately 440 MB.
 
 ### ```Scripts.sh```
 
